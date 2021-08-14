@@ -5,15 +5,23 @@
 
       <span>Rômulo</span>
 
-      <ion-button color="light" fill="clear" size="small">
-        <ion-icon slot="icon-only" name="arrow-down-outline"></ion-icon>
+      <ion-button
+        (click)="toggleBlocks()"
+        color="light"
+        fill="clear"
+        size="small"
+      >
+        <ion-icon
+          slot="icon-only"
+          [name]="initialStep > 0 ? 'arrow-up-outline' : 'arrow-down-outline'"
+        ></ion-icon>
       </ion-button>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" color="primary">
-  <div class="background">
+  <div #background class="background opacity-transition">
     <div class="bank-information ion-text-center">
       <img class="qrcode" src="../../assets/qrcode.png" />
 
@@ -41,7 +49,7 @@
     </ion-button>
   </div>
 
-  <div class="blocks">
+  <div #blocks class="blocks" [ngClass]="fixedBlocks() ? 'fixed' : null">
     <ion-card>
       <ion-item class="ion-margin-vertical" lines="none">
         <ion-icon slot="start" name="card-outline"></ion-icon>
@@ -120,9 +128,9 @@
   </div>
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer [ngClass]="initialStep > 0 ? 'hidden' : null" class="ion-no-border">
   <ion-toolbar class="ion-nomargin ion-padding-vertical" color="primary">
-    <ion-slides [options]="slidesOptions">
+    <ion-slides class="opacity-transition" [options]="slidesOptions">
       <ion-slide *ngFor="let option of options">
         <div class="container ion-text-left">
           <ion-icon [name]="option.icon"></ion-icon>
