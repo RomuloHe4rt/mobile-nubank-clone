@@ -32,7 +32,7 @@
 
     <ion-list lines="full">
       <ion-item *ngFor="let item of items" detail>
-        <ion-icon slot="start" [name]="item.icon"></ion-icon>
+        <ion-icon slot="start" [name]="item.icon" color="light"></ion-icon>
 
         <ion-label>{{ item.text }}</ion-label>
       </ion-item>
@@ -51,7 +51,7 @@
 
   <div #blocks class="blocks" [ngClass]="fixedBlocks() ? 'fixed' : null">
     <ion-card>
-      <ion-item class="ion-margin-vertical" lines="none">
+      <ion-item #swipDown class="ion-margin-vertical" lines="none">
         <ion-icon slot="start" name="card-outline"></ion-icon>
         <ion-label>Cartão de crédito</ion-label>
       </ion-item>
@@ -119,7 +119,6 @@
             </p>
           </ion-text>
         </div>
-
         <ion-button expand="block" fill="outline">
           <strong>ATIVE O SEU REWARDS</strong>
         </ion-button>
@@ -128,7 +127,7 @@
   </div>
 </ion-content>
 
-<ion-footer [ngClass]="initialStep > 0 ? 'hidden' : null" class="ion-no-border">
+<ion-footer [ngClass]="fixedBlocks() ? 'hidden' : null" class="ion-no-border">
   <ion-toolbar class="ion-nomargin ion-padding-vertical" color="primary">
     <ion-slides class="opacity-transition" [options]="slidesOptions">
       <ion-slide *ngFor="let option of options">
